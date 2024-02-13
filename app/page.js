@@ -11,10 +11,12 @@ export default function Home() {
   const handelUpperCase = () => {
     let newText = text.toUpperCase();
     setText(newText);
+    showAlert("Text in Uppercase","text-yellow-800 rounded-lg bg-yellow-50 dark:bg-gray-800 dark:text-yellow-300");
   };
   const handelLowerCase = () => {
     let newText = text.toLowerCase();
     setText(newText);
+    showAlert("Text in Lowercase","text-yellow-800 rounded-lg bg-yellow-50 dark:bg-gray-800 dark:text-yellow-300");
   };
   const handelCapitalizeCase = () => {
     // Split the input string into an array of words
@@ -27,6 +29,7 @@ export default function Home() {
     // Join the words back into a sentence
     let capitalizedText = words.join(" ");
     setText(capitalizedText);
+    showAlert("Text in capitalize case","text-yellow-800 rounded-lg bg-yellow-50 dark:bg-gray-800 dark:text-yellow-300");
   };
   const handelOnCopy = () => {
     // Select the text in the textarea
@@ -43,17 +46,27 @@ export default function Home() {
     console.log("Text copied to clipboard!");
     setAlert(true);
     console.log(alertState);
+    showAlert("Text copied to clipboard!","text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400");
   };
 
   const [alertState,setAlert]=useState(false);
   setTimeout(()=>{
     setAlert(false)
-  },1500);
+  },3000);
+
+  const showAlert=(message,style)=>{
+    setAlert({
+      msg:message,
+      style:style,
+      status:true,
+    });
+  }
   return (
     <>
       <div className="max-w-2xl mx-auto pt-14">
         {/* Start alert code */}
-        <Alert className="text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" value="Your text is copied successfully" alertState={alertState}/>
+        {/* <Alert className="text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" value="Your text is copied successfully" alertState={alertState}/> */}
+        <Alert value={alertState}/>
         {/* End alert code */}
 
         <form>

@@ -1,13 +1,12 @@
 import React from 'react'
 
-function Alert({value="Default value of Alert",className,alertState="false"}) {
-   
+function Alert({value}) {
 
   return (
     <div
           id="alert-3"
-          className={`flex items-center transition-all p-4 mb-4 ${className}
-          ${alertState?'opacity-100':'opacity-0'}
+          className={`flex items-center transition-all p-4 mb-4 ${value.style}
+          ${value.status?'opacity-100':'opacity-0'}
           `}
           role="alert"
         >
@@ -22,7 +21,7 @@ function Alert({value="Default value of Alert",className,alertState="false"}) {
           </svg>
           <span className="sr-only">Info</span>
           <div className="ms-3 text-sm font-medium">
-         {value}
+         {value.msg}
           </div>
         </div>
   )
