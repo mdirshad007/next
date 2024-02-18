@@ -1,10 +1,15 @@
-"use client"; // This is a client component
-import TextCase from "@/components/TextCase/TextCase";
+"use client";
+import LatestNews from "@/components/LatestNews/LatestNews";
+import Mycounter from "@/components/Mycounter/Mycounter";
 
+ // This is a client component
 export default function Home() {
     return (
     <>
-    <h1>New project is start</h1>
+    <div className="main pt-[70px]">
+    <LatestNews/>
+    {/* <Mycounter/> */}
+    </div>
     </>
   );
 }
