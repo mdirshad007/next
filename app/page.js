@@ -7,7 +7,7 @@ export default function Home() {
     return (
     <>
     <div className="main pt-[70px]">
-    <LatestNews/>
+    <LatestNews perPagePost={12}/>
     {/* <Mycounter/> */}
     </div>
     </>
