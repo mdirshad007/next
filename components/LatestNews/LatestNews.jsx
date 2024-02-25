@@ -1,10 +1,16 @@
 import React, { useEffect, useState } from "react";
 import NewsCard from "../NewsCard/NewsCard";
+import Spinner from "../Spinner/Spinner";
+import { MoonLoader } from "react-spinners";
 
-function LatestNews() {
+function LatestNews({perPagePost}) {
+  const [loader,setLoader]=useState(null);
+  const [totalPost,setTotalPost]=useState(1);
   const [pageNo,setpageNo]=useState(1);
-  const handelNextClick=()=>{   
+  const handelNextClick=()=>{
+    if(totalPost!=pageNo){
     setpageNo(pageNo+1)
+  }
   }
   const handelPrevClick=()=>{
     if(pageNo>=2){
@@ -15,10 +21,13 @@ function LatestNews() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        let apiLink=`https://newsapi.org/v2/top-headlines?country=in&category=entertainment&apiKey=3db45571a94d482fb3fdd1adcc10cd09&page=${pageNo}`;
+        let apiLink=`https://newsapi.org/v2/top-headlines?country=in&category=entertainment&apiKey=3db45571a94d482fb3fdd1adcc10cd09&page=${pageNo}&pageSize=${perPagePost}`;
         let data = await fetch(apiLink);
         data = await data.json();
-        setNews(data.articles)
+        setNews(data.articles);
+        const noOfPages=Math.round(data.totalResults/12);
+        setTotalPost(noOfPages);
+        setLoader(data);
         console.log(news);
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -32,6 +41,7 @@ function LatestNews() {
     <section className="py-20 px-5">
          <div className="w-[1280px] mx-auto">
             <h1 className="mb-8 text-center text-4xl">Latest News Update</h1>
+            {loader?"": <Spinner className="w-20 mx-auto"/>}
          </div>
       <div className="w-[1280px] mx-auto flex flex-wrap">
       {news.map((item) => (
@@ -51,11 +61,12 @@ function LatestNews() {
           Previous
         </button>
         <button
-        onClick={handelNextClick}
-          className="relative ml-3 inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
-        >
-          Next
-        </button>
+  disabled={pageNo === totalPost}
+  onClick={handelNextClick}
+  className="relative ml-3 inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
+>
+  Next
+</button>
       </div>
     </div>
       </div>
