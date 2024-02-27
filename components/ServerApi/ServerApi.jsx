@@ -18,7 +18,7 @@ async function ServerApi() {
         <div className="w-[1280px] mx-auto flex flex-wrap">
         {products.map((item) => (
         //   <p key={item.id}>{item.title}</p>
-        <div className="md:w-2/6 p-1">
+        <div key={item.id} className="md:w-2/6 p-1">
           <HorizontalCard key={item.id} title={item.title} description={item.description} rating={item.rating} img={item.thumbnail} price={item.price}/>
         </div>
         ))}

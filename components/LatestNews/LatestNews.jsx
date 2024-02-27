@@ -45,7 +45,7 @@ function LatestNews({perPagePost}) {
          </div>
       <div className="w-[1280px] mx-auto flex flex-wrap">
       {news.map((item) => (
-        <div className="md:w-2/6 p-1">
+        <div key={item.urlToImage} className="md:w-2/6 p-1">
         <NewsCard key={item.url} img={item.urlToImage} title={item.title} description={item.description} url={item.url}/>
         </div>
           ))}
